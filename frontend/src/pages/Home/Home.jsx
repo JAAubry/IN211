@@ -3,28 +3,26 @@ import './Home.css';
 import { useState } from 'react';
 import React, { useEffect } from 'react';
 import axios from 'axios';
-import { use } from 'react';
 
+// function useFetchMovies() {
+//   const [movies, setMovies] = useState([]);
+//   useEffect(() => {
+//     axios
+//       .get(`https://api.themoviedb.org/3/movie/popular?api_key=57359ff087905e870d40ba4880a1dce0`)
+//       .then((response) => {
+//         setMovies(response.data.results);
+//       })
+//       .catch((error) => {
+//         // Do something if call failed
+//         console.log(error);
+//       })
 
-function useFetchMovies() {
-  const [movies, setMovies] = useState([]);
-  useEffect(() => {
-    axios
-      .get(`https://api.themoviedb.org/3/movie/popular?api_key=57359ff087905e870d40ba4880a1dce0`)
-      .then((response) => {
-        setMovies(response.data.results);
-      })
-      .catch((error) => {
-        // Do something if call failed
-        console.log(error);
-      })
+//     return;
+//   }, []);
+//   console.log("useFetchMovies", movies)
 
-    return;
-  }, []);
-  console.log("useFetchMovies", movies)
-
-  return { movies };
-}
+//   return { movies };
+// }
 
 
 
@@ -32,10 +30,6 @@ function Home() {
   console.log("Début Home")
   const [movieName, setMovieName] = useState(" ")
 
-  const movies = useFetchMovies();
-
-  console.log("movies", movies)
-  const listMovies = movies.map(movie => <li key={movie.id}>{movie}</li>)
   return (
     <div className="App">
       <header className="App-header">
@@ -50,9 +44,6 @@ function Home() {
         <p>
           {movieName}
         </p>
-
-        <ul><li key={movies[0].id}>{movies[0]}</li></ul>
-
 
         <a
           className="App-link"
