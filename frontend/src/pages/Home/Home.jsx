@@ -32,7 +32,9 @@ const useFetchMovies = () => {
 function Home() {
   const [movieName, setMovieName] = useState(" ")
   const { movies, moviesLoadingError } = useFetchMovies();
-
+  const listItems = movies.map((movie) =>
+    <li key={movie.id}>{movie.title}</li>
+  );
 
   return (
     <div className="App">
@@ -48,6 +50,8 @@ function Home() {
         <p>
           {movieName}
         </p>
+
+        <ul>{listItems}</ul>
 
         <a
           className="App-link"
