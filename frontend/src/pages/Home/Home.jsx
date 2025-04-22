@@ -4,31 +4,35 @@ import { useState } from 'react';
 import React, { useEffect } from 'react';
 import axios from 'axios';
 
-// function useFetchMovies() {
-//   const [movies, setMovies] = useState([]);
-//   useEffect(() => {
-//     axios
-//       .get(`https://api.themoviedb.org/3/movie/popular?api_key=57359ff087905e870d40ba4880a1dce0`)
-//       .then((response) => {
-//         setMovies(response.data.results);
-//       })
-//       .catch((error) => {
-//         // Do something if call failed
-//         console.log(error);
-//       })
 
-//     return;
-//   }, []);
-//   console.log("useFetchMovies", movies)
 
-//   return { movies };
-// }
+
+const useFetchMovies = () => {
+  const [movies, setMovies] = useState([]);
+  const [moviesLoadingError, setMoviesLoadingError] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(`https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&api_key=522d421671cf75c2cba341597d86403a`)
+      .then((response) => {
+        setMovies(response.data.results);
+      })
+      .catch((error) => {
+        setMoviesLoadingError('An error occured while fetching movies.');
+        console.error(error);
+      });
+  }, []);
+
+  return { movies, moviesLoadingError };
+}
+
 
 
 
 function Home() {
-  console.log("Début Home")
   const [movieName, setMovieName] = useState(" ")
+  const { movies, moviesLoadingError } = useFetchMovies();
+
 
   return (
     <div className="App">
