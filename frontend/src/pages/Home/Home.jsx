@@ -32,8 +32,13 @@ const useFetchMovies = () => {
 function Home() {
   const [movieName, setMovieName] = useState(" ")
   const { movies, moviesLoadingError } = useFetchMovies();
-  const listItems = movies.map((movie) =>
-    <li key={movie.id}>{movie.title}</li>
+
+  const baseurl = "https://image.tmdb.org/t/p/w500";
+  const listTitleAndDate = movies.map((movie) =>
+    <li key={movie.id}> {movie.title} {movie.release_date} </li>
+  );
+  const listImages = movies.map((movie) =>
+    <img key={movie.id} src={baseurl + movie.backdrop_path} />
   );
 
   return (
@@ -51,7 +56,7 @@ function Home() {
           {movieName}
         </p>
 
-        <ul>{listItems}</ul>
+        <ul>{listTitleAndDate} {listImages}</ul>
 
         <a
           className="App-link"
